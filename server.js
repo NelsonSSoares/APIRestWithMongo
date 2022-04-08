@@ -1,11 +1,7 @@
-const http = require('http');
-const port = 3000;
+import app from './src/app.js';
+const port = process.env.PORT || 3000;
+import chalk from 'chalk'; 
 
-const server = http.createServer((req, res)=>{
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Curso de Node.js');
-});
-
-server.listen(port, () => {
-    console.log(`Server Online!!, Port: ${port}`);
+app.listen(port, () => {
+    console.log(chalk.green(`Server Online!!, Port: ${port}`));
 });
