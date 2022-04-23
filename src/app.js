@@ -43,6 +43,15 @@ app.put('/livros/:id', (req, res) =>{
 
 })
 
+app.delete('/livros/:id', (req, res) =>{
+    let {id} = req.params
+    let index = buscaLivro(id);
+    livros.splice(index, 1); // elemento a ser excluido , numeros de indice posterior a serem excluidos
+    console.log(chalk.green(`Cadastro Deletado com  Sucesso!`));
+    res.send(`Livro ${id} excluido com sucesso!`);
+
+})
+
 function buscaLivro(id){
     return livros.findIndex(livro => livro.id == id);
 }
