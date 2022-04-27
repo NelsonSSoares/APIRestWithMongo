@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/NelsonSSoares/APIRestWithMongo#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.6"
   },
   "devDependencies": {
     "chalk": "^5.0.1",
