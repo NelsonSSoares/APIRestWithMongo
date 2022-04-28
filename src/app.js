@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import express from 'express';
 import db from './config/dbConnect.js';
+import livros from './models/Livro.js';
 
 db.on('error', console.log.bind(console, chalk.red('Connection Error!')));
 db.once('open', () => {
@@ -11,17 +12,24 @@ const app = express();
 
 app.use(express.json());
 
-const livros = [
+
+
+/* const livros = [
     {id: 1, "tilulo": "Tenet"},
     {id: 2, "titulo": "O Resgate do Soldade Ryan"}
-]
+] */
 
 app.get('/', (req, res)=> {
     res.status(200).send('Curso de Node');
 });
 
 app.get('/livros', (req,res) =>{
+
+    livros.find((error, livros)=>{
+        
     res.status(200).json(livros);
+    });
+
 } );
 
 app.get('/livros/:id', (req, res) =>{
