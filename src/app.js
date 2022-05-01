@@ -17,12 +17,6 @@ app.use(express.json());
 routes(app);
 
 
-/* const livros = [
-    {id: 1, "tilulo": "Tenet"},
-    {id: 2, "titulo": "O Resgate do Soldade Ryan"}
-] */
-
-
 app.get('/livros/:id', (req, res) =>{
     //req.body = {id}
     let index = buscaLivro(req.params.id);
@@ -30,11 +24,6 @@ app.get('/livros/:id', (req, res) =>{
     console.log(chalk.green(`Consulta realizada com  Sucesso!`));
 })
 
-app.post('/livros', (req,res)=>{
-    livros.push(req.body);
-    res.status(201).send('livro cadastrado com sucesso');
-    //res.status(201).json(livros[2]);
-});
 
 app.put('/livros/:id', (req, res) =>{
     //req.body = {id}
