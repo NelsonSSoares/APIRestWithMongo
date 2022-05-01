@@ -17,26 +17,6 @@ app.use(express.json());
 routes(app);
 
 
-app.get('/livros/:id', (req, res) =>{
-    //req.body = {id}
-    let index = buscaLivro(req.params.id);
-    res.json(livros[index]);
-    console.log(chalk.green(`Consulta realizada com  Sucesso!`));
-})
-
-
-app.put('/livros/:id', (req, res) =>{
-    //req.body = {id}
-    let index = buscaLivro(req.params.id);
-
-    livros[index].titulo = req.body.titulo
-
-    console.log(chalk.green(`Cadastro alterado com  Sucesso!`));
-
-    res.json(livros);
-
-})
-
 app.delete('/livros/:id', (req, res) =>{
     let {id} = req.params
     let index = buscaLivro(id);
