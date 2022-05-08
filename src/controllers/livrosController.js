@@ -23,6 +23,8 @@ class LivroController {
         })
     }
 
+
+    
     static cadastrarLivro = (req, res) => {
         let livro = new livros(req.body);
 
