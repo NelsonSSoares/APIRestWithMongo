@@ -5,32 +5,33 @@ class LivroController {
 
     static listarLivros = (req, res) => {
 
-        livros.find((error, livros) => {
+        livros.find().populate('autor')
 
-            res.status(200).json(livros);
-        });
+            .exec((error, livros) => {
+
+                res.status(200).json(livros);
+            });
     }
 
-    static listarLivroPorId = (req,res) => {
+    static listarLivroPorId = (req, res) => {
         const id = req.params.id;
 
-        livros.findById(id, (error, livros)=>{
-            if(error){
-                res.status(400).send({message: `${error.message} id não encontrado!` })
-            }else{
-                res.status(200).send(livros.toJSON());
-            }
-        })
+        livros.findById(id).populate('autor', 'nome').exec(
+            (error, livros) => {
+                if (error) {
+                    res.status(400).send({ message: `${error.message} id não encontrado!` })
+                } else {
+                    res.status(200).send(livros.toJSON());
+                }
+            })
     }
 
-
-    
     static cadastrarLivro = (req, res) => {
         let livro = new livros(req.body);
 
-        livro.save((error)=>{
-            if(error){
-                res.status(500).send({message: `${error.message} - error to create a book`})
+        livro.save((error) => {
+            if (error) {
+                res.status(500).send({ message: `${error.message} - error to create a book` })
             } else {
                 res.status(201).send(livro.toJSON());
             }
@@ -40,25 +41,25 @@ class LivroController {
     static atualizarLivro = (req, res) => {
         const id = req.params.id;
 
-        livros.findByIdAndUpdate(id, {$set: req.body}, (error)=>{
-            if(!error){
-                res.status(200).send({message: 'Livro atualizado com sucesso!'})
-            }else{
-                res.status(500).send({message: error.message})
+        livros.findByIdAndUpdate(id, { $set: req.body }, (error) => {
+            if (!error) {
+                res.status(200).send({ message: 'Livro atualizado com sucesso!' })
+            } else {
+                res.status(500).send({ message: error.message })
             }
         });
 
-        
+
     }
 
-    static excluirLivro = (req, res) =>{
+    static excluirLivro = (req, res) => {
         const id = req.params.id;
 
-        livros.findByIdAndDelete(id, (error)=>{
-            if(!error){
-                res.status(200).send({message: 'Livro Excluido com Sucesso!'});
-            }else{
-                res.status(500).send({message: error.message})
+        livros.findByIdAndDelete(id, (error) => {
+            if (!error) {
+                res.status(200).send({ message: 'Livro Excluido com Sucesso!' });
+            } else {
+                res.status(500).send({ message: error.message })
             }
         })
     }
